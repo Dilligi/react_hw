@@ -1,5 +1,9 @@
+.header {
+    background: #333333;
+}
+
 .header_title {
-    /*color: #FFF;*/
+    color: #FFF;
     font-size: 32px;
     font-weight: 700;
 }

@@ -7,10 +7,49 @@
 html,
 body {
   max-width: 100vw;
+  max-height: 100vh;
   overflow-x: hidden;
+  background: #F5F5F5;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+button {
+  padding: 0;
+  outline: 0;
+  background-color: transparent;
+  border: none;
+}
+
+main {
+  margin-top: 83px;
+  min-height: calc(100vh - 155px);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+p:not(:last-of-type) {
+  margin-bottom: 16px;
 }

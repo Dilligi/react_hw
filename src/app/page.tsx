@@ -1,8 +1,68 @@
+'use client'
+
 import Image from 'next/image'
-import styles from './page.module.css'
+import HomeStyles from './home.module.css'
+import mainStyles from '../styles/main.module.css'
+import Link from 'next/link'
+let data = require('../../public/mock')['movies']
+
+interface Prop {
+  id: number,
+  posterUrl: string,
+  genre: string,
+  title: string
+}
+
+function FilmItem(props: Prop) {
+  return (
+      <div className={HomeStyles.home_films_item}>
+          <div className={HomeStyles.home_films_item_info}>
+              <div className={HomeStyles.home_films_item_info_img}>
+                  <Image
+                  src={props.posterUrl}
+                  width={100}
+                  height={120}
+                  alt=''
+                  >
+                  </Image>
+              </div>
+              <div className={HomeStyles.home_films_item_info_title}>
+                  <Link href={`Film/${props.id}`}><h2>{props.title}</h2></Link>
+                  <span className={HomeStyles.home_films_item_info_subtitle}>{props.genre}</span>
+              </div>
+          </div>
+          <div className={HomeStyles.home_films_item_buttons}>
+              <button className={HomeStyles.home_films_item_button}>-</button>
+              <span className={HomeStyles.home_films_item_buttons_text}>5</span>
+              <button className={HomeStyles.home_films_item_button}>+</button>
+          </div>
+      </div>
+  )
+}
 
 export default function Home() {
+  let filmItems = data.map((x: Prop) => {
+    return (
+        <FilmItem 
+        key={x.id}
+        id={x.id}
+        posterUrl={x.posterUrl}
+        title={x.title}
+        genre={x.genre}
+        />
+    )
+})
+
   return (
-    <h1>Hello world!</h1>
+    <main>
+      <div className={mainStyles.container}>
+        <div className={HomeStyles.home_filter}>
+
+        </div>
+        <div className={HomeStyles.home_films_items}>
+          {filmItems}
+        </div>
+      </div>
+    </main>
   )
 }

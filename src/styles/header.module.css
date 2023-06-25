@@ -1,9 +1,15 @@
 .header {
     background: #333333;
+    position: fixed;
+    width: 100%;
 }
 
 .header_title {
     color: #FFF;
     font-size: 32px;
     font-weight: 700;
+}
+
+.header_img {
+    
 }

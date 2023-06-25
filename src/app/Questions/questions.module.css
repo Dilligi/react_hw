@@ -1,0 +1,32 @@
+.questions_title {
+    border-radius: 8px;
+    background: #FFF;
+    padding: 24px;
+    width: 100%;
+}
+
+.question_item {
+    border-radius: 8px;
+    background: #FFF;
+    padding: 24px;
+    width: 100%;
+    margin-top: 24px;
+}
+
+.question_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.question_arrow_active {
+    transform: rotate(180deg);
+    transition: .3s;
+}
+
+.question_body {
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 24px;
+}

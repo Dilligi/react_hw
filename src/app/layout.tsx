@@ -1,9 +1,11 @@
 import './globals.css'
-import Header from './Components/Header'
+import Header from '../Components/Header'
+import Footer from '../Components/Footer'
 import { Roboto } from 'next/font/google'
+import Link from 'next/link'
  
 const roboto = Roboto({
-  weight: ['400', '700'],
+  weight: ['400', '500', '700'],
   style: ['normal', 'italic'],
   subsets: ['cyrillic', 'latin']
 })
@@ -21,9 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <Header />
-        {children}
-
+          <Header />
+          {children}
+          <Footer />
       </body>
     </html>
   )

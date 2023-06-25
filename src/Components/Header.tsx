@@ -14,7 +14,7 @@ export default function Header() {
           </Link>
           <Link className={HeaderStyles.header_img} href="/Basket">
             <Image 
-            src='./img/basket.svg'
+            src='../img/basket.svg'
             width={32}
             height={32}
             alt=''

@@ -1,0 +1,126 @@
+.film_main_section {
+    border-radius: 8px;
+    padding: 24px;
+    background-color: #FFF;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.film_main_img {
+    margin-right: 32px;
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 400px;
+}
+
+.film_main_img img {
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.film_main_content {
+    flex-grow: 2;
+}
+
+.film_main_head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.film_main_buttons {
+    display: flex;
+}
+
+.film_main_button {
+    border-radius: 4px;
+    background: #FF5500;
+    color: white;
+    width: 20px;
+    height: 20px;
+    margin: 0 8px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.film_main_button:hover {
+    background: #ff0000;
+}
+
+.film_main_button:active {
+    background: #d70202;
+}
+
+.film_main_info {
+    margin: 24px 0;
+    font-size: 20px;
+    line-height: 24px;
+    color: #1B1F23;
+    list-style-type: none;
+}
+
+.film_main_info li:not(:last-of-type) {
+    margin-bottom: 16px;
+}
+
+.film_main_desc {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.film_main_desc_title {
+    margin-bottom: 16px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 32px;
+}
+
+.film_reviews {
+    width: 100%;
+}
+
+.film_review_item {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px;
+    border-radius: 8px;
+    background-color: #FFF;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.film_review_item_img {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E0E0E0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.film_review_item_content {
+    width: 100%;
+    margin-left: 32px;
+}
+
+.film_review_item_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 20px;
+    line-height: 32px;
+    margin-bottom: 16px;
+}
+
+.film_review_item_name {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 32px;
+}
+
+.film_review_item_body {
+
+}

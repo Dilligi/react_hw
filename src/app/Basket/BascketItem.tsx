@@ -2,8 +2,10 @@ import Image from "next/image"
 import BasketStyles from './basket.module.css'
 import { TicketButtons } from "../../Components/TicketButtons"
 import { useEffect } from "react"
+import Link from "next/link"
 
 interface ItemProp {
+    id: string,
     src: string,
     genre: string,
     title: string,
@@ -24,7 +26,7 @@ export const BasketItem = (props: ItemProp) => {
                     </Image>
                 </div>
                 <div className={BasketStyles.basket_item_info_title}>
-                    <h2>{props.title}</h2>
+                    <Link href={`/Film/${props.id}`}><h2>{props.title}</h2></Link>
                     <span className={BasketStyles.basket_item_info_subtitle}>{props.genre}</span>
                 </div>
             </div>

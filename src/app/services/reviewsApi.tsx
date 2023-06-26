@@ -5,8 +5,8 @@ export const reviewsApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:3001/api/'}),
     endpoints: (builder) => ({
         getReviews: builder.query({ query: () => 'reviews' }),
-        
+        getReviewsOnFilm: builder.query({ query: (id) => `reviews?movieId=${id}` }),
     })
 });
 
-export const { useGetReviewsQuery } = reviewsApi;
+export const { useGetReviewsQuery, useGetReviewsOnFilmQuery } = reviewsApi;

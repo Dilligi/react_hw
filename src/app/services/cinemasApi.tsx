@@ -5,8 +5,8 @@ export const cinemasApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:3001/api/'}),
     endpoints: (builder) => ({
         getCinemas: builder.query({ query: () => 'cinemas' }),
-        
+        getCinema: builder.query({ query: (id) => `movies?cinemaId=${id}`})
     })
 });
 
-export const { useGetCinemasQuery } = cinemasApi;
+export const { useGetCinemasQuery, useGetCinemaQuery } = cinemasApi;

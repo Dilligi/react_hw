@@ -70,6 +70,7 @@ export default function Basket() {
             return (
                 <TicketButtonsContext.Provider key={x.id} value={{id: x.id, openModal: () => setIsModalOpen(true), setModalId}}>
                     <BasketItem
+                    id={x.id}
                     src={x.posterUrl}
                     title={x.title}
                     genre={x.genre}
@@ -87,7 +88,7 @@ export default function Basket() {
         else document.body.style.overflow = ""
     }, [isModalOpen])
 
-    function closeModal(e: any) {
+    function closeModal(e: React.ChangeEvent<HTMLInputElement>) {
 
         if (BasketStyles.modal === e.target.className || 
             BasketStyles.basket_modal_button_yes === e.target.className ||

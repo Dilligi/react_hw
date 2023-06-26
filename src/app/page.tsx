@@ -4,7 +4,7 @@ import Image from 'next/image'
 import HomeStyles from './home.module.css'
 import mainStyles from '../styles/main.module.css'
 import Link from 'next/link'
-import { KeyboardEvent, KeyboardEventHandler, ReactComponentElement, ReactElement, createContext, useContext, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, KeyboardEventHandler, ReactComponentElement, ReactElement, createContext, useContext, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { JsxElement } from 'typescript'
 import {useSelector} from 'react-redux'
@@ -13,6 +13,8 @@ import { store } from './store/store'
 import { cartSlice } from './store/featers/cart'
 import { TicketButtons } from '@/Components/TicketButtons'
 import { useGetMoviesQuery } from './services/movieApi'
+import { useGetCinemaQuery, useGetCinemasQuery } from './services/cinemasApi'
+import { FilterList } from '@/Components/FilterList'
 
 interface Prop {
   id: string,
@@ -46,58 +48,61 @@ function FilmItem(props: Prop) {
   )
 }
 
-function FilterList({children, chooseTitle} : {children: ReactElement[], chooseTitle: string}) {
-  let [isOpen, setIsOpen] = useState(false)
-  let [inputValue, setInputValue] = useState('');
-  let left = useRef(0), top = useRef(0), width = useRef(0);
-
-  function openList(e: React.ChangeEvent<HTMLInputElement>) {
-    setIsOpen(true)
-    left.current = e.target.getBoundingClientRect().x;
-    top.current = e.target.getBoundingClientRect().bottom;
-    width.current = e.target.getBoundingClientRect().width;
-  }
-
-  return (
-    <>
-      <input type="text" name="title" placeholder={chooseTitle} onKeyUp={(e: any) => setInputValue(e.target.value)} onFocus={(e) => openList(e)} onBlur={() => setIsOpen(false)}/>
-      <Image className={`${HomeStyles.home_filter_input_arrow} ${isOpen? HomeStyles.home_filter_input_arrow_active : ''}`}
-      src='./img/arrow-square-down.svg'
-      width={20}
-      height={20}
-      alt=''
-      ></Image>
-      {isOpen && createPortal((
-        <ul className={HomeStyles.filter_list} style={{top: top.current, left: left.current, width: width.current}}>
-          {children.filter((child) => child.props.title.includes(inputValue))}
-        </ul>
-      ), document.body)}
-    </>
-  )
-}
-
-FilterList.Item = function Item({title} : {title: string}) {
-  return (
-    <li className={HomeStyles.filter_list_item}>{title}</li>
-  )
-}
-
 
 export default function Home() {
   let [inputTitle, setInputTitle] = useState('')
   let [inputCinema, setInputCinema] = useState('')
   let [filmItems, setFilmItems] = useState([])
+  let [genreItems, setGenreItems] = useState([<></>])
   let [cinemaItems, setCinemaItems] = useState([])
+  let [curCinema, setCurCinema] = useState('')
+  let [curGenre, setCurGenre] = useState('')
+  let [cinemaFilter, setCinemaFilter] = useState([])
   let movies = useGetMoviesQuery('');
+  let cinemas = useGetCinemasQuery('');
   let moviesData = movies.currentData ? movies.currentData : [];
+
+  useEffect(() => {
+    if (!cinemas.isLoading && !cinemas.error) {
+      setCinemaItems(
+        cinemas.currentData.map((x: {id: string, name: string}) => {
+          return (
+            <FilterList.Item key={x.id} title={x.name} id={x.id} />
+          )
+        })
+      );
+    }
+  }, [cinemas])
 
   useEffect(() => {
     if (!moviesData.length) return;
 
+    setGenreItems(() => {
+      let genres: Set<string> = new Set()
+
+      moviesData
+      .map((x: {genre: string}) => {
+        genres.add(x.genre)
+      })
+
+      let genresArr = Array.from(genres);
+
+      let genreComponents = genresArr.map((x, i) => {
+        return (
+          <FilterList.Item key={i} title={x} />
+        )
+      })
+
+      return genreComponents;
+    });
+
     setFilmItems(
       moviesData
       .filter((x: Prop) => {
-          return x.title.toLowerCase().includes(inputTitle.toLowerCase())
+
+          return x.title.toLowerCase().includes(inputTitle.toLowerCase()) &&
+                 (!cinemaFilter.length || cinemaFilter.includes(x.id)) &&
+                 (!curGenre || x.genre.toLowerCase() === curGenre.toLowerCase())
       })
       .map((x: Prop) => {
 
@@ -112,7 +117,7 @@ export default function Home() {
       )
   }))
 
-  }, [moviesData, inputTitle])
+  }, [moviesData, inputTitle, cinemaFilter, curGenre])
 
   return (
     <main>
@@ -122,22 +127,18 @@ export default function Home() {
             <h3>Фильтр поиска</h3>
             <div className={HomeStyles.home_filter_input_container}>
               Название
-              <input type="text" name="title" placeholder='Введите название' onKeyUp={(e: any) => setInputTitle(e.target.value)}/>
+              <input type="text" name="title" placeholder='Введите название' onChange={(e: ChangeEvent<HTMLInputElement>) => setInputTitle(e.target.value)}/>
             </div>
             <div className={HomeStyles.home_filter_input_container}>
               Жанр
-              <FilterList chooseTitle='Выберите жанр'>
-                <FilterList.Item title='Item' />
-                <FilterList.Item title='Item' />
-                <FilterList.Item title='Item' />
+              <FilterList chooseTitle='Выберите жанр' setCurItem={setCurGenre}>
+                {genreItems? genreItems : [<></>]}
               </FilterList>
             </div>
             <div className={HomeStyles.home_filter_input_container}>
               Кинотеатр
-              <FilterList chooseTitle='Выберите кинотеатр'>
-                <FilterList.Item title='Item1' />
-                <FilterList.Item title='Item2' />
-                <FilterList.Item title='Item23' />
+              <FilterList chooseTitle='Выберите кинотеатр' setCurItem={setCurCinema} itemType={cinemas.currentData} setTypeFilter={setCinemaFilter}>
+                {cinemaItems? cinemaItems : [<></>]}
               </FilterList>
             </div>
           </div>

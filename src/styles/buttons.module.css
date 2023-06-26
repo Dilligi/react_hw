@@ -1,0 +1,37 @@
+.basket_item_buttons {
+    display: flex;
+}
+
+.basket_item_button {
+    border-radius: 4px;
+    background: #FF5500;
+    color: white;
+    width: 20px;
+    height: 20px;
+    margin: 0 8px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.basket_item_button:hover {
+    background: #ff0000;
+}
+
+.basket_item_button:active {
+    background: #d70202;
+}
+
+.btn_disabled {
+    background-color: #FFA375;
+    cursor: alias;
+  }
+  
+  .btn_disabled:hover {
+    background-color: #FFA375;
+  }
+
+.basket_item_close {
+    margin-left: 16px;
+    height: 20px;
+    cursor: pointer;
+}

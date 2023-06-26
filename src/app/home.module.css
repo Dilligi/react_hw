@@ -1,6 +1,11 @@
 .home_films_items {
   width: 75%;
   margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* animation: 1s slideLeft; */
 }
 
 .home_films_item {
@@ -36,6 +41,15 @@
   background: #d70202;
 }
 
+.btn_disabled {
+  background-color: #FFA375;
+  cursor: alias;
+}
+
+.btn_disabled:hover {
+  background-color: #FFA375;
+}
+
 .home_films_item_info {
   display: flex;
   gap: 24px;
@@ -63,9 +77,9 @@
 .home_filter {
   width: 25%;
   padding: 24px;
-  height: 100vh;
+  height: calc(100vh - 156px);
   position: fixed;
-  top: 0;
+  top: 84px;
   left: 0;
   display: flex;
   align-items: center;
@@ -75,7 +89,7 @@
   padding: 24px;
   border-radius: 8px;
   background-color: #FFF;
-  height: 81%;
+  height: 100%;
   width: 100%;
 }
 
@@ -84,6 +98,7 @@
   font-family: SF Pro Text;
   line-height: 20px;
   margin-top: 20px;
+  position: relative;
 }
 
 .home_filter_input_container input {
@@ -101,8 +116,20 @@
   transition: .3s;
 }
 
+.home_filter_input_arrow {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  transition: .5s;
+}
+
+.home_filter_input_arrow_active {
+  transform: rotate(180deg);
+}
+
 .home_filter_input_container input:focus {
   border: 1px solid #FF5500;
+  color: black;
 }
 
 .home_filter_input_container input:focus::placeholder {
@@ -114,4 +141,35 @@
   font-family: SF Pro Text;
   line-height: 20px;
   color: #999FA6;
+}
+
+.filter_list {
+  position: absolute;
+  background-color: #FFF;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0px 10px 22px -4px rgba(27, 31, 35, 0.12);
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.filter_list_item {
+  width: 100%;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.filter_list_item:hover {
+  background-color: #edeff1;
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }

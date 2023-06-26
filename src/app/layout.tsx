@@ -3,6 +3,7 @@ import Header from '../Components/Header'
 import Footer from '../Components/Footer'
 import { Roboto } from 'next/font/google'
 import Link from 'next/link'
+import { StoreProvider } from './store/StoreProvider'
  
 const roboto = Roboto({
   weight: ['400', '500', '700'],
@@ -24,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
           <Header />
-          {children}
+          <StoreProvider>{children}</StoreProvider>
           <Footer />
       </body>
     </html>

@@ -58,6 +58,10 @@ h3 {
   line-height: 20px;
 }
 
+ul {
+  list-style-type: none;
+}
+
 p {
   font-size: 16px;
   line-height: 24px;
@@ -65,4 +69,10 @@ p {
 
 p:not(:last-of-type) {
   margin-bottom: 16px;
+}
+
+.loading-image {
+  overflow: hidden;
+  border-radius: 50%;
+  width: fit-content;
 }

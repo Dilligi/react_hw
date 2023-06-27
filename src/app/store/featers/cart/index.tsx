@@ -6,7 +6,7 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState: initialState,
     reducers: {
-        increment: (state, {payload}) => {
+        increment: (state: any, {payload}) => {
             const count = state[payload] || 0;
 
             if (count == 30)
@@ -15,7 +15,7 @@ export const cartSlice = createSlice({
             state[payload] = count + 1;
         },
 
-        decrement: (state, {payload}) => {
+        decrement: (state: any, {payload}) => {
             const count = state[payload];
             
             if (!count) {
@@ -30,7 +30,7 @@ export const cartSlice = createSlice({
             state[payload] = count - 1;
         },
 
-        remove: (state, {payload}) => {
+        remove: (state: any, {payload}) => {
             delete state[payload];
         }
     }

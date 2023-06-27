@@ -19,8 +19,8 @@ export function FilterList({children, chooseTitle, setCurItem=null, itemType=nul
 
 
     if (setTypeFilter) {
-        let typeFilter = itemType.filter((x) => x.id === curId)
-        setTypeFilter(typeFilter.length? typeFilter.map((x) => x.movieIds)[0] : [])
+        let typeFilter = itemType.filter((x: {id: string}) => x.id === curId)
+        setTypeFilter(typeFilter.length? typeFilter.map((x: {movieIds: string[]}) => x.movieIds)[0] : [])
     }
   }
 

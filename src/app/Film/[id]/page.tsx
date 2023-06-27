@@ -7,7 +7,7 @@ import { useGetMovieQuery } from '@/app/services/movieApi';
 import { TicketButtons } from '@/Components/TicketButtons';
 import { useGetReviewsOnFilmQuery } from '@/app/services/reviewsApi';
 
-function Review(props) {
+function Review(props: any) {
     return (
         <div className={FilmStyles.film_review_item}>
             <div className={FilmStyles.film_review_item_img}>
@@ -35,7 +35,7 @@ export default function Page({params} : {params : {id: string}}) {
     let movie = useGetMovieQuery(params.id);
     let reviews = useGetReviewsOnFilmQuery(params.id)
 
-    // if (movie.isLoading || reviews.isLoading) {
+    if (movie.isLoading || reviews.isLoading) {
         return (
             <main>
                 <div className={mainStyles.container} style={{justifyContent: 'center'}}>
@@ -50,12 +50,12 @@ export default function Page({params} : {params : {id: string}}) {
                 </div>
             </main>
         )
-    // }
+    }
 
     let movieData = movie.currentData
     let reviewsData = reviews.currentData
 
-    let reviewsComponents = reviewsData.map((x) => {
+    let reviewsComponents = reviewsData.map((x: any) => {
         return <Review 
                 key={x.id}
                 {...x}

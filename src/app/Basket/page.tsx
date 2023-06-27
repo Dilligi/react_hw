@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import BasketStyles from './basket.module.css'
 import mainStyles from '../../styles/main.module.css'
 import Image from 'next/image'
@@ -93,13 +93,13 @@ export default function Basket() {
         if (BasketStyles.modal === e.target.className || 
             BasketStyles.basket_modal_button_yes === e.target.className ||
             BasketStyles.basket_modal_button_no === e.target.className ||
-            BasketStyles.modal_close === e.target.className || BasketStyles.modal_close === e.target.parentElement.className)
+            BasketStyles.modal_close === e.target.className || BasketStyles.modal_close === e.target.parentElement?.className)
         setIsModalOpen(false)
     }
 
     return (
         <main>
-            {isModalOpen && createPortal(<BasketModal closeModal={(e: Event) => closeModal(e)} id={modalId} />, document.body)}
+            {isModalOpen && createPortal(<BasketModal closeModal={(e: ChangeEvent<HTMLInputElement>) => closeModal(e)} id={modalId} />, document.body)}
 
             <div className={mainStyles.container}>
                 <div className={BasketStyles.basket_wrapper}>

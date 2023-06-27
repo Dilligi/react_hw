@@ -57,7 +57,7 @@ export default function Home() {
   let [cinemaItems, setCinemaItems] = useState([])
   let [curCinema, setCurCinema] = useState('')
   let [curGenre, setCurGenre] = useState('')
-  let [cinemaFilter, setCinemaFilter] = useState([])
+  let [cinemaFilter, setCinemaFilter]: [string[], any] = useState([])
   let movies = useGetMoviesQuery('');
   let cinemas = useGetCinemasQuery('');
   let moviesData = movies.currentData ? movies.currentData : [];
